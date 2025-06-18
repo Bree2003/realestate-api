@@ -13,10 +13,10 @@ jobs:
 
     strategy:
       matrix:
-        node: [16.x, 18.x]
+        node: [18.x, 19.x]
 
     steps:
-      - name: Checout del código
+      - name: Checkout del código
         uses: actions/checkout@v3
 
       - name: Configurar Node.js
@@ -39,4 +39,8 @@ jobs:
 
       - name: Reportar éxito
         if: success()
+        run: echo "✅ API funcional en Node ${{matrix.node}}"
+
+      - name: Reportar error
+        if: failure()
         run: echo "❌ Falla detectada en los tests para Node ${{matrix.node}}"
